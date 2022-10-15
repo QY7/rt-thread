@@ -44,7 +44,7 @@
 #define RT_USING_DEVICE
 #define RT_USING_CONSOLE
 #define RT_CONSOLEBUF_SIZE 128
-#define RT_CONSOLE_DEVICE_NAME "scia"
+#define RT_CONSOLE_DEVICE_NAME "sci1"
 #define RT_VER_NUM 0x50000
 #define ARCH_TIDSP
 #define ARCH_TIDSP_C28X
@@ -193,6 +193,10 @@
 #define BSP_ADC_USING_12BIT
 #define BSP_USING_ADC2
 #define BSP_USING_ADC3
+#define BSP_USING_SCI
+#define BSP_SERIAL_SCI_INDEX 1
+#define BSP_USING_SCI1
+#define BSP_SCI1_ENABLE_RX_IT
 
 /* Board extended module Drivers */
 

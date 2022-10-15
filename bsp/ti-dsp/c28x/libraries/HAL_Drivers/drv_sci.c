@@ -60,36 +60,24 @@ static rt_err_t c28x_configure(struct rt_serial_device *serial, struct serial_co
 
     uart->sci_regs->SCICTL1.all = 0x0023;  // Relinquish SCI from Reset
 
-    switch (cfg->data_bits)
+    if(cfg->data_bits > 4 && cfg->data_bits < 9)
     {
-    case DATA_BITS_5:
-        uart->sci_regs->SCICCR.bit.SCICHAR = 4;
-        break;
-    case DATA_BITS_6:
-        uart->sci_regs->SCICCR.bit.SCICHAR = 5;
-        break;
-    case DATA_BITS_7:
-        uart->sci_regs->SCICCR.bit.SCICHAR = 6;
-        break;
-    case DATA_BITS_8:
-        uart->sci_regs->SCICCR.bit.SCICHAR = 7;
-        break;
-    default:
-        uart->sci_regs->SCICCR.bit.SCICHAR = 7;
-        break;
+        uart->sci_regs->SCICCR.bit.SCICHAR = cfg->data_bits-1;
     }
-    switch (cfg->stop_bits)
+    else
     {
-    case STOP_BITS_1:
-        uart->sci_regs->SCICCR.bit.STOPBITS = 0;
-        break;
-    case STOP_BITS_2:
-        uart->sci_regs->SCICCR.bit.STOPBITS = 1;
-        break;
-    default:
-        uart->sci_regs->SCICCR.bit.STOPBITS = 0;
-        break;
+        uart->sci_regs->SCICCR.bit.SCICHAR = 7;
     }
+
+    if(cfg->stop_bits < 2)
+    {
+        uart->sci_regs->SCICCR.bit.STOPBITS = cfg->stop_bits;
+    }
+    else
+    {
+        uart->sci_regs->SCICCR.bit.STOPBITS = 0;
+    }
+
     switch (cfg->parity)
     {
     case PARITY_NONE:
@@ -162,10 +150,12 @@ static void uart_isr(struct rt_serial_device *serial) {
     struct c28x_uart *uart = (struct c28x_uart *) serial->parent.user_data;
 
     RT_ASSERT(uart != RT_NULL);
-
-    rt_hw_serial_isr(serial, RT_SERIAL_EVENT_RX_IND);
-    SciaRegs.SCIFFRX.bit.RXFFINTCLR = 1;   // Clear Interrupt flag
-    PieCtrlRegs.PIEACK.all |= 0x100;       // Issue PIE ack
+    if(uart->name[3]-'0' == BSP_SERIAL_SCI_INDEX)
+    {
+        rt_hw_serial_isr(serial, RT_SERIAL_EVENT_RX_IND);
+    }
+    uart->sci_regs->SCIFFRX.bit.RXFFINTCLR = 1;   // Clear Interrupt flag
+    PieCtrlRegs.PIEACK.all |= M_INT9;       // Issue PIE ack
 }
 
 static const struct rt_uart_ops c28x_uart_ops =
@@ -176,9 +166,8 @@ static const struct rt_uart_ops c28x_uart_ops =
     .getc = c28x_getc,
 };
 
-//
-// sciaRxFifoIsr - SCIA Receive FIFO ISR
-//
+
+#ifdef BSP_SCI1_ENABLE_RX_IT
 interrupt void sciaRxFifoIsr(void)
 {
     ALLOW_ISR_PREEMPT();
@@ -191,73 +180,124 @@ interrupt void sciaRxFifoIsr(void)
     /* leave interrupt */
     rt_interrupt_leave();
 }
+#endif
+
+#ifdef BSP_SCI2_ENABLE_RX_IT
+interrupt void scibRxFifoIsr(void)
+{
+    ALLOW_ISR_PREEMPT();
+
+    /* enter interrupt */
+    rt_interrupt_enter();
+
+    uart_isr(&uart_obj[1].serial);
+
+    /* leave interrupt */
+    rt_interrupt_leave();
+}
+#endif
+
+#ifdef BSP_SCI3_ENABLE_RX_IT
+interrupt void scicRxFifoIsr(void)
+{
+    ALLOW_ISR_PREEMPT();
+
+    /* enter interrupt */
+    rt_interrupt_enter();
+
+    uart_isr(&uart_obj[2].serial);
+
+    /* leave interrupt */
+    rt_interrupt_leave();
+}
+#endif
 
 int rt_hw_sci_init(void)
 {
     EALLOW;
-
+#ifdef BSP_USING_SCI1
     GpioCtrlRegs.GPBMUX1.bit.GPIO42 = 3;
     GpioCtrlRegs.GPBMUX1.bit.GPIO43 = 3;
     GpioCtrlRegs.GPBGMUX1.bit.GPIO42 = 3;
     GpioCtrlRegs.GPBGMUX1.bit.GPIO43 = 3;
-
+    CpuSysRegs.PCLKCR7.bit.SCI_A = 1;
+    #ifdef BSP_SCI1_ENABLE_RX_IT
+        PieCtrlRegs.PIEIER9.bit.INTx1 = 1;   // PIE Group 9, INT1
+        PieVectTable.SCIA_RX_INT = &sciaRxFifoIsr;
+    #endif
+    #ifdef BSP_SCI1_ENABLE_TX_IT
+        PieCtrlRegs.PIEIER9.bit.INTx2 = 1;   // PIE Group 9, INT1
+        PieVectTable.SCIA_TX_INT = &sciaTxFifoIsr;
+    #endif
+    IER |= 0x100;                        // Enable CPU INT
+#endif
+#ifdef BSP_USING_SCI2
     GpioCtrlRegs.GPAMUX2.bit.GPIO18 = 2;
     GpioCtrlRegs.GPAMUX2.bit.GPIO19 = 2;
     GpioCtrlRegs.GPAGMUX2.bit.GPIO18 = 0;
     GpioCtrlRegs.GPAGMUX2.bit.GPIO19 = 0;
-
+    CpuSysRegs.PCLKCR7.bit.SCI_B = 1;
+    #ifdef BSP_SCI2_ENABLE_RX_IT
+        PieCtrlRegs.PIEIER9.bit.INTx3 = 1;   // PIE Group 9, INT1
+        PieVectTable.SCIB_RX_INT = &scibRxFifoIsr;
+    #endif
+    #ifdef BSP_SCI2_ENABLE_TX_IT
+        PieCtrlRegs.PIEIER9.bit.INTx4 = 1;   // PIE Group 9, INT1
+        PieVectTable.SCIB_TX_INT = &scibTxFifoIsr;
+    #endif
+    IER |= 0x100;                        // Enable CPU INT
+#endif
+#ifdef BSP_USING_SCI3
     GpioCtrlRegs.GPBMUX2.bit.GPIO56 = 2;
     GpioCtrlRegs.GPEMUX1.bit.GPIO139 = 2;
     GpioCtrlRegs.GPBGMUX2.bit.GPIO56 = 1;
     GpioCtrlRegs.GPEGMUX1.bit.GPIO139 = 1;
-
-    CpuSysRegs.PCLKCR7.bit.SCI_A = 1;
-    CpuSysRegs.PCLKCR7.bit.SCI_B = 1;
     CpuSysRegs.PCLKCR7.bit.SCI_C = 1;
-
-    PieVectTable.SCIA_RX_INT = &sciaRxFifoIsr;
+    #ifdef BSP_SCI3_ENABLE_RX_IT
+        PieCtrlRegs.PIEIER8.bit.INTx5 = 1;   // PIE Group 9, INT1
+        PieVectTable.SCIC_RX_INT = &scicRxFifoIsr;
+    #endif
+    #ifdef BSP_SCI3_ENABLE_TX_IT
+        PieCtrlRegs.PIEIER8.bit.INTx6 = 1;   // PIE Group 9, INT1
+        PieVectTable.SCIC_TX_INT = &scicTxFifoIsr;
+    #endif
+    IER |= M_INT8;                        // Enable CPU INT
+#endif
 
     EDIS;
 
-    //
-    // Enable interrupts required for this example
-    //
-    PieCtrlRegs.PIECTRL.bit.ENPIE = 1;   // Enable the PIE block
-    PieCtrlRegs.PIEIER9.bit.INTx1 = 1;   // PIE Group 9, INT1
-    IER |= 0x100;                        // Enable CPU INT
-
     struct serial_configure config = RT_SERIAL_CONFIG_DEFAULT;
     rt_err_t result = 0;
-
+#ifdef BSP_USING_SCI1
     uart_obj[0].serial.ops    = &c28x_uart_ops;
     uart_obj[0].serial.config = config;
-    uart_obj[0].name          = "scia";
+    uart_obj[0].name          = "sci1";
     uart_obj[0].sci_regs      = &SciaRegs;
-
-    uart_obj[1].serial.ops    = &c28x_uart_ops;
-    uart_obj[1].serial.config = config;
-    uart_obj[1].name          = "scib";
-    uart_obj[1].sci_regs      = &ScibRegs;
-
-    uart_obj[2].serial.ops    = &c28x_uart_ops;
-    uart_obj[2].serial.config = config;
-    uart_obj[2].name          = "scic";
-    uart_obj[2].sci_regs      = &ScicRegs;
-
     /* register UART device */
     result = rt_hw_serial_register(&uart_obj[0].serial, uart_obj[0].name,
                                    RT_DEVICE_FLAG_RDWR | RT_DEVICE_FLAG_INT_RX,
                                    &uart_obj[0]);
-
+#endif
+#ifdef BSP_USING_SCI2
+    uart_obj[1].serial.ops    = &c28x_uart_ops;
+    uart_obj[1].serial.config = config;
+    uart_obj[1].name          = "sci2";
+    uart_obj[1].sci_regs      = &ScibRegs;
     /* register UART device */
     result = rt_hw_serial_register(&uart_obj[1].serial, uart_obj[1].name,
                                    RT_DEVICE_FLAG_RDWR | RT_DEVICE_FLAG_INT_RX,
                                    &uart_obj[1]);
-
+#endif
+#ifdef BSP_USING_SCI3
+    uart_obj[2].serial.ops    = &c28x_uart_ops;
+    uart_obj[2].serial.config = config;
+    uart_obj[2].name          = "sci3";
+    uart_obj[2].sci_regs      = &ScicRegs;
     /* register UART device */
     result = rt_hw_serial_register(&uart_obj[2].serial, uart_obj[2].name,
                                    RT_DEVICE_FLAG_RDWR | RT_DEVICE_FLAG_INT_RX,
                                    &uart_obj[2]);
+#endif
 
     return result;
 }

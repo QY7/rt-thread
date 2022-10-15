@@ -1027,6 +1027,57 @@ menu "On-chip Peripheral Drivers"
                 endif
         endif
 
+    menuconfig BSP_USING_SCI
+        bool "Enable SCI"
+        select RT_USING_SERIAL
+        default y
+        if BSP_USING_SCI
+
+            config BSP_SERIAL_SCI_INDEX
+            int "Index of sci module for serial"
+            range 1,3
+            default 1
+
+            menuconfig BSP_USING_SCI1
+            bool "Enable SCI1"
+            default y
+            if BSP_USING_SCI1
+                config BSP_SCI1_ENABLE_RX_IT
+                bool "Enable RX interrupt for SCI1"
+                default y
+
+                config BSP_SCI1_ENABLE_TX_IT
+                bool "Enable TX interrupt for SCI1"
+                default n
+            endif
+
+            menuconfig BSP_USING_SCI2
+            bool "Enable SCI2"
+            default n
+            if BSP_USING_SCI2
+                config BSP_SCI2_ENABLE_RX_IT
+                bool "Enable RX interrupt for SCI2"
+                default n
+
+                config BSP_SCI2_ENABLE_TX_IT
+                bool "Enable TX interrupt for SCI2"
+                default n
+            endif
+
+            menuconfig BSP_USING_SCI3
+            bool "Enable SCI3"
+            default n
+            if BSP_USING_SCI3
+                config BSP_SCI3_ENABLE_RX_IT
+                bool "Enable RX interrupt for SCI3"
+                default n
+
+                config BSP_SCI3_ENABLE_TX_IT
+                bool "Enable TX interrupt for SCI3"
+                default n
+            endif
+        endif
+
     menuconfig BSP_USING_ONCHIP_RTC
         bool "Enable RTC"
         select RT_USING_RTC
