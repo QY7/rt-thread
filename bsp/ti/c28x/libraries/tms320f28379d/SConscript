@@ -1,0 +1,34 @@
+import rtconfig
+Import('RTT_ROOT')
+from building import *
+
+# get current directory
+cwd = GetCurrentDir()
+
+# The set of source files associated with this SConscript file.
+src = Split("""
+tms320f28379d/common/source/F2837xD_Adc.c
+tms320f28379d/common/source/F2837xD_can.c
+tms320f28379d/common/source/F2837xD_CpuTimers.c
+tms320f28379d/common/source/F2837xD_DefaultISR.c
+tms320f28379d/common/source/F2837xD_Dma.c
+tms320f28379d/common/source/F2837xD_ECap.c
+tms320f28379d/common/source/F2837xD_Emif.c
+tms320f28379d/common/source/F2837xD_Epwm.c
+tms320f28379d/common/source/F2837xD_EQep.c
+tms320f28379d/common/source/F2837xD_Gpio.c
+tms320f28379d/common/source/F2837xD_I2C.c
+tms320f28379d/common/source/F2837xD_Ipc.c
+tms320f28379d/common/source/F2837xD_PieCtrl.c
+tms320f28379d/common/source/F2837xD_PieVect.c
+tms320f28379d/common/source/F2837xD_SysCtrl.c
+tms320f28379d/headers/source/F2837xD_GlobalVariableDefs.c
+""")
+
+path = [cwd + '/headers/include', 
+    cwd + '/common/include']
+
+CPPDEFINES = ['USE_HAL_DRIVER']
+group = DefineGroup('Libraries', src, depend = [''], CPPPATH = path, CPPDEFINES = CPPDEFINES)
+
+Return('group')
