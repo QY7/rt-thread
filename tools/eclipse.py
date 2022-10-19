@@ -73,6 +73,7 @@ def CollectFiles(paths, pattern):
             for item in pattern:
                 # print('--> %s' % (path + '/' + item))
                 files = files + glob.glob(path + '/' + item)
+                # print(files)
 
     return sorted(files)
 
@@ -426,14 +427,14 @@ def GenExcluding(env, project):
     exclude_paths = [RelativeProjectPath(env, path).replace('\\', '/') for path in exclude_paths]
 
     all_files = CollectFiles(all_paths, source_pattern)
+
     src_files = project['FILES']
 
     exclude_files = ExcludeFiles(all_files, src_files)
     exclude_files = [RelativeProjectPath(env, file).replace('\\', '/') for file in exclude_files]
-
     env['ExPaths'] = exclude_paths
     env['ExFiles'] = exclude_files
-
+    
     return exclude_paths + exclude_files
 
 
@@ -567,7 +568,6 @@ def TargetEclipse(env, reset=False, prj_name=None):
 
     # generate the exclude paths and files
     excluding = GenExcluding(env, project)
-
     # update the project configuration on '.cproject' file
     UpdateCproject(env, project, excluding, reset, prj_name)
 

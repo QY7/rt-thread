@@ -71,12 +71,6 @@
 /* Device Drivers */
 
 #define RT_USING_DEVICE_IPC
-#define RT_USING_SERIAL
-#define RT_USING_SERIAL_V1
-#define RT_SERIAL_RB_BUFSZ 64
-#define RT_USING_PIN
-#define RT_USING_ADC
-#define RT_USING_PWM
 
 /* Using USB */
 
@@ -124,8 +118,21 @@
 
 /* language packages */
 
+/* JSON: JavaScript Object Notation, a lightweight data-interchange format */
+
+
+/* XML: Extensible Markup Language */
+
 
 /* multimedia packages */
+
+/* LVGL: powerful and easy-to-use embedded GUI library */
+
+
+/* u8g2: a monochrome graphic library */
+
+
+/* PainterEngine: A cross-platform graphics application framework written in C language */
 
 
 /* tools packages */
@@ -133,14 +140,35 @@
 
 /* system packages */
 
+/* enhanced kernel services */
+
+
+/* acceleration: Assembly language or algorithmic acceleration packages */
+
+
+/* CMSIS: ARM Cortex-M Microcontroller Software Interface Standard */
+
+
+/* Micrium: Micrium software products porting for RT-Thread */
+
 
 /* peripheral libraries and drivers */
 
 
+/* Kendryte SDK */
+
+
+/* AI packages */
+
+
 /* miscellaneous packages */
 
+/* project laboratory */
 
 /* samples: kernel and components samples */
+
+
+/* entertainment: terminal games and other interesting software packages */
 
 
 /* Hardware Drivers Config */
@@ -149,14 +177,6 @@
 
 /* On-chip Peripheral Drivers */
 
-#define BSP_USING_GPIO
-#define BSP_USING_UART
-#define BSP_USING_UART1
-#define BSP_USING_ADC
-#define BSP_USING_ADC1
-#define BSP_ADC_USING_12BIT
-#define BSP_USING_ADC2
-#define BSP_USING_ADC3
 
 /* Board extended module Drivers */
 
