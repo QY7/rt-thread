@@ -558,11 +558,13 @@ def TargetEclipse(env, reset=False, prj_name=None):
                 os.path.abspath(".settings/org.eclipse.core.runtime.prefs")) is False:
             print('Fail!')
             return
+
     # add clean2 target to fix issues when files too many
     if not os.path.exists('makefile.targets'):
         if rt_studio.gen_makefile_targets(os.path.abspath("makefile.targets")) is False:
             print('Fail!')
             return
+
     project = ProjectInfo(env)
 
     # update the project file structure info on '.project' file
