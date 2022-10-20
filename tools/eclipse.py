@@ -122,6 +122,7 @@ def ExcludePaths(rootpath, paths):
         fullname = os.path.join(OSPath(rootpath), file)
 
         if os.path.isdir(fullname):
+            # print(fullname)
             if not fullname in paths:
                 ret = ret + [fullname]
             else:
@@ -425,7 +426,6 @@ def GenExcluding(env, project):
     exclude_paths = [RelativeProjectPath(env, path).replace('\\', '/') for path in exclude_paths]
 
     all_files = CollectFiles(all_paths, source_pattern)
-
     src_files = project['FILES']
 
     exclude_files = ExcludeFiles(all_files, src_files)
@@ -435,8 +435,10 @@ def GenExcluding(env, project):
         if("rt-thread/bsp/ti/c28x/libraries" in exclude_files[i]):
             exclude_files[i] = exclude_files[i].replace('rt-thread/bsp/ti/c28x/libraries','libraries')
             print(exclude_files[i])
+            
     env['ExPaths'] = exclude_paths
     env['ExFiles'] = exclude_files
+
     return exclude_paths + exclude_files
 
 
