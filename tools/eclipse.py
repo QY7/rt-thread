@@ -558,7 +558,6 @@ def TargetEclipse(env, reset=False, prj_name=None):
                 os.path.abspath(".settings/org.eclipse.core.runtime.prefs")) is False:
             print('Fail!')
             return
-
     # add clean2 target to fix issues when files too many
     if not os.path.exists('makefile.targets'):
         if rt_studio.gen_makefile_targets(os.path.abspath("makefile.targets")) is False:
@@ -571,7 +570,7 @@ def TargetEclipse(env, reset=False, prj_name=None):
 
     # generate the exclude paths and files
     excluding = GenExcluding(env, project)
-    
+
     # update the project configuration on '.cproject' file
     UpdateCproject(env, project, excluding, reset, prj_name)
 
