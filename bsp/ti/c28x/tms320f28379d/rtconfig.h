@@ -71,6 +71,13 @@
 /* Device Drivers */
 
 #define RT_USING_DEVICE_IPC
+#define RT_USING_SERIAL
+#define RT_USING_SERIAL_V1
+#define RT_SERIAL_USING_DMA
+#define RT_SERIAL_RB_BUFSZ 64
+#define RT_USING_PIN
+#define RT_USING_ADC
+#define RT_USING_PWM
 
 /* Using USB */
 
@@ -177,6 +184,9 @@
 
 /* On-chip Peripheral Drivers */
 
+#define BSP_USING_GPIO
+#define BSP_USING_PWM
+#define BSP_USING_ADC
 
 /* Board extended module Drivers */
 
