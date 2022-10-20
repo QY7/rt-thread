@@ -435,7 +435,7 @@ def GenExcluding(env, project):
         if("rt-thread/bsp/ti/c28x/libraries" in exclude_files[i]):
             exclude_files[i] = exclude_files[i].replace('rt-thread/bsp/ti/c28x/libraries','libraries')
             print(exclude_files[i])
-            
+
     env['ExPaths'] = exclude_paths
     env['ExFiles'] = exclude_files
 
@@ -565,10 +565,13 @@ def TargetEclipse(env, reset=False, prj_name=None):
             print('Fail!')
             return
     project = ProjectInfo(env)
+
     # update the project file structure info on '.project' file
     UpdateProjectStructure(env, prj_name)
+
     # generate the exclude paths and files
     excluding = GenExcluding(env, project)
+    
     # update the project configuration on '.cproject' file
     UpdateCproject(env, project, excluding, reset, prj_name)
 
