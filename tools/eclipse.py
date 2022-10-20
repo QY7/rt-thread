@@ -73,7 +73,6 @@ def CollectFiles(paths, pattern):
             for item in pattern:
                 # print('--> %s' % (path + '/' + item))
                 files = files + glob.glob(path + '/' + item)
-                # print(files)
 
     return sorted(files)
 
@@ -123,7 +122,6 @@ def ExcludePaths(rootpath, paths):
         fullname = os.path.join(OSPath(rootpath), file)
 
         if os.path.isdir(fullname):
-            # print(fullname)
             if not fullname in paths:
                 ret = ret + [fullname]
             else:
@@ -432,9 +430,13 @@ def GenExcluding(env, project):
 
     exclude_files = ExcludeFiles(all_files, src_files)
     exclude_files = [RelativeProjectPath(env, file).replace('\\', '/') for file in exclude_files]
+
+    for i in range(len(exclude_files)):
+        if("rt-thread/bsp/ti/c28x/libraries" in exclude_files[i]):
+            exclude_files[i] = exclude_files[i].replace('rt-thread/bsp/ti/c28x/libraries','libraries')
+
     env['ExPaths'] = exclude_paths
     env['ExFiles'] = exclude_files
-    
     return exclude_paths + exclude_files
 
 
@@ -560,12 +562,9 @@ def TargetEclipse(env, reset=False, prj_name=None):
         if rt_studio.gen_makefile_targets(os.path.abspath("makefile.targets")) is False:
             print('Fail!')
             return
-
     project = ProjectInfo(env)
-
     # update the project file structure info on '.project' file
     UpdateProjectStructure(env, prj_name)
-
     # generate the exclude paths and files
     excluding = GenExcluding(env, project)
     # update the project configuration on '.cproject' file

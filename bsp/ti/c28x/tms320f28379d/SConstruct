@@ -35,20 +35,28 @@ Export('RTT_ROOT')
 Export('rtconfig')
 
 SDK_ROOT = os.path.abspath('./')
-if os.path.exists(SDK_ROOT + '\..\libraries'):
-    libraries_path_prefix = SDK_ROOT + '\..\libraries'
+if os.path.exists(SDK_ROOT + '/libraries'):
+    libraries_path_prefix = SDK_ROOT + '/libraries'
+    print("exist")
 else:
     libraries_path_prefix = os.path.dirname(SDK_ROOT) + '/libraries'
+    print("no")
+    print(os.path.dirname(SDK_ROOT))
 
 SDK_LIB = libraries_path_prefix
 Export('SDK_LIB')
 
+print("after add lib")
 # prepare building environment
 objs = PrepareBuilding(env, RTT_ROOT, has_libcpu=False)
 
+c28x_library = 'tms320f28379d'
+rtconfig.BSP_LIBRARY_TYPE = c28x_library
+
+# include libraries
+objs.extend(SConscript(os.path.join(libraries_path_prefix, c28x_library, 'SConscript')))
 
 # include drivers
 objs.extend(SConscript(os.path.join(libraries_path_prefix, 'HAL_Drivers', 'SConscript')))
-# print(os.path.join(libraries_path_prefix, 'HAL_Drivers', 'SConscript'))
 # make a building
 DoBuilding(TARGET, objs)

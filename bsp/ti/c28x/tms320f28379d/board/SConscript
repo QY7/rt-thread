@@ -16,7 +16,5 @@ path =  [cwd]
 
 startup_path_prefix = SDK_LIB
 
-src += [startup_path_prefix + '/HAL_Drivers/drv_sci.c']
-
 group = DefineGroup('Drivers', src, depend = [''], CPPPATH = path)
 Return('group')
