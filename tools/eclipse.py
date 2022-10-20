@@ -389,7 +389,6 @@ def GenExcluding(env, project):
     for path in all_paths_temp:
         if path.startswith(rtt_root) or path.startswith(bsp_root):
             all_paths.append(path)
-
     if bsp_root.startswith(rtt_root):
         # bsp folder is in the RT-Thread root folder, such as the RT-Thread source code on GitHub
         exclude_paths = ExcludePaths(rtt_root, all_paths)
@@ -409,7 +408,9 @@ def GenExcluding(env, project):
     else:
         exclude_paths = ExcludePaths(rtt_root, all_paths)
         exclude_paths += ExcludePaths(bsp_root, all_paths)
-
+    # print("$$$$$ all path $$$$$")
+    # for p in all_paths:
+    #     print(p)
     paths = exclude_paths
     exclude_paths = []
     # remove the folder which not has source code by source_pattern
@@ -427,14 +428,18 @@ def GenExcluding(env, project):
 
     all_files = CollectFiles(all_paths, source_pattern)
     src_files = project['FILES']
-
+    for files in all_files:
+        if('E:\\Documents\\workspace\\C\\rt-thread\\components\\' in files):
+            print(files)
+        # print(files)
     exclude_files = ExcludeFiles(all_files, src_files)
     exclude_files = [RelativeProjectPath(env, file).replace('\\', '/') for file in exclude_files]
 
     for i in range(len(exclude_files)):
+        print(exclude_files[i])
         if("rt-thread/bsp/ti/c28x/libraries" in exclude_files[i]):
             exclude_files[i] = exclude_files[i].replace('rt-thread/bsp/ti/c28x/libraries','libraries')
-            print(exclude_files[i])
+            # print(exclude_files[i])
 
     env['ExPaths'] = exclude_paths
     env['ExFiles'] = exclude_files

@@ -23,7 +23,8 @@ if GetDepend(['RT_USING_PULSE_ENCODER']):
 if GetDepend(['RT_USING_INPUT_CAPTURE']):
     src = src + ['rt_inputcapture.c']
 
+# print("running in misc")
 if len(src):
     group = DefineGroup('DeviceDrivers', src, depend = [''], CPPPATH = CPPPATH)
-
+# print(src)
 Return('group')
