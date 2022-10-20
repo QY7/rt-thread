@@ -95,7 +95,7 @@ menu "On-chip Peripheral Drivers"
         if BSP_USING_PWM
             menuconfig BSP_USING_PWM1
                 bool "Enable ePWM1"
-                default n
+                default y
                 if BSP_USING_PWM1
                     menu "Basic settings for PWM1"
                         config BSP_PWM1_INIT_PERIOD
