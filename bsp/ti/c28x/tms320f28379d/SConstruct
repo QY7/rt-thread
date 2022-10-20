@@ -46,7 +46,6 @@ else:
 SDK_LIB = libraries_path_prefix
 Export('SDK_LIB')
 
-print("after add lib")
 # prepare building environment
 objs = PrepareBuilding(env, RTT_ROOT, has_libcpu=False)
 
