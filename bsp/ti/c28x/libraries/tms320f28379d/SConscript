@@ -10,8 +10,10 @@ src = Split("""
 common/source/F2837xD_PieCtrl.c
 common/source/F2837xD_PieVect.c
 common/source/F2837xD_SysCtrl.c
+common/source/F2837xD_CpuTimers.c
 headers/source/F2837xD_GlobalVariableDefs.c
 common/source/F2837xD_DefaultISR.c
+common/source/F2837xD_Gpio.c
 """)
 
 if GetDepend(['BSP_USING_ADC']):
@@ -20,7 +22,6 @@ if GetDepend(['BSP_USING_ADC']):
 if GetDepend(['BSP_USING_CAN']):
     src += ['common/source/F2837xD_can.c']
 
-if GetDepend(['BSP_USING_HWTIMER']):
     src += ['common/source/F2837xD_CpuTimers.c']
 
 if GetDepend(['BSP_USING_DMA']):
@@ -35,14 +36,15 @@ if GetDepend(['BSP_USING_PWM']):
 if GetDepend(['BSP_USING_QEP']):
     src += ['common/source/F2837xD_EQep.c']
 
-if GetDepend(['BSP_USING_GPIO']):
-    src += ['common/source/F2837xD_Gpio.c']
-
 if GetDepend(['BSP_USING_I2C']):
     src += ['common/source/F2837xD_I2C.c']
 
 if GetDepend(['BSP_USING_SPI']):
     src += ['common/source/F2837xD_Spi.c']
+
+if GetDepend(['BSP_USING_UART']):
+    src += ['common/source/F2837xD_Sci.c']
+    src += ['common/source/F2837xD_sci_io.c']
     
 path = [cwd + '/headers/include', 
     cwd + '/headers/include']

@@ -21,7 +21,7 @@ from utils import xml_indent
 
 MODULE_VER_NUM = 6
 
-source_pattern = ['*.c', '*.cpp', '*.cxx', '*.s', '*.S', '*.asm']
+source_pattern = ['*.c', '*.cpp', '*.cxx', '*.s', '*.S', '*.asm','*.cmd']
 
 
 def OSPath(path):
@@ -428,17 +428,13 @@ def GenExcluding(env, project):
 
     all_files = CollectFiles(all_paths, source_pattern)
     src_files = project['FILES']
-    # for files in all_files:
-    #     print(files)
+
     exclude_files = ExcludeFiles(all_files, src_files)
     exclude_files = [RelativeProjectPath(env, file).replace('\\', '/') for file in exclude_files]
 
     print("excluding files")
-    for i in range(len(exclude_files)):
-        # print(exclude_files[i])
-        if("rt-thread/bsp/ti/c28x/libraries" in exclude_files[i]):
-            # exclude_files[i] = exclude_files[i].replace('rt-thread/bsp/ti/c28x/libraries','libraries')
-            print(exclude_files[i])
+    for i in range(len(exclude_paths)):
+        print(exclude_paths[i])
 
     env['ExPaths'] = exclude_paths
     env['ExFiles'] = exclude_files
