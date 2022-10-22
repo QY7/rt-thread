@@ -434,8 +434,8 @@ def GenExcluding(env, project):
 
     print("excluding files")
     for i in range(len(exclude_files)):
-        if('rt-thread/bsp/ti/c28x/libraries/HAL_Drivers/' in exclude_files[i]):
-            print(exclude_files[i])
+        # if('rt-thread/bsp/ti/c28x/libraries/HAL_Drivers/' in exclude_files[i]):
+        print(exclude_files[i])
 
     env['ExPaths'] = exclude_paths
     env['ExFiles'] = exclude_files
