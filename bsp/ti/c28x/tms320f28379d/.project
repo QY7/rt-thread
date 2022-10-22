@@ -38,7 +38,17 @@
     <link>
       <name>rt-thread/components</name>
       <type>2</type>
-      <locationURI>$%7BPARENT-4-PROJECT_LOC%7D/components</locationURI>
+      <locationURI>virtual:/virtual</locationURI>
+    </link>
+    <link>
+      <name>rt-thread/components/finsh</name>
+      <type>2</type>
+      <locationURI>$%7BPARENT-4-PROJECT_LOC%7D/components/finsh</locationURI>
+    </link>
+    <link>
+      <name>rt-thread/components/drivers</name>
+      <type>2</type>
+      <locationURI>$%7BPARENT-4-PROJECT_LOC%7D/components/drivers</locationURI>
     </link>
     <link>
       <name>rt-thread/include</name>
