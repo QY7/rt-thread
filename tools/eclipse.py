@@ -21,7 +21,7 @@ from utils import xml_indent
 
 MODULE_VER_NUM = 6
 
-source_pattern = ['*.c', '*.cpp', '*.cxx', '*.s', '*.S', '*.asm','*.cmd']
+source_pattern = ['*.c', '*.cpp', '*.cxx', '*.s', '*.S', '*.asm']
 
 
 def OSPath(path):
@@ -433,8 +433,9 @@ def GenExcluding(env, project):
     exclude_files = [RelativeProjectPath(env, file).replace('\\', '/') for file in exclude_files]
 
     print("excluding files")
-    for i in range(len(exclude_paths)):
-        print(exclude_paths[i])
+    for i in range(len(exclude_files)):
+        if('rt-thread/bsp/ti/c28x/libraries/HAL_Drivers/' in exclude_files[i]):
+            print(exclude_files[i])
 
     env['ExPaths'] = exclude_paths
     env['ExFiles'] = exclude_files
@@ -517,6 +518,15 @@ def UpdateCproject(env, project, excluding, reset, prj_name):
     out.write('<?fileVersion 4.0.0?>')
     xml_indent(root)
     out.write(etree.tostring(root, encoding='utf-8').decode('utf-8'))
+    out.close()
+    
+    out = open('.cproject', 'r')
+    data = out.readlines()
+    for i in range(len(data)):
+        data[i] = data[i].replace(' />','/>')
+    out.close()
+    out = open('.cproject', 'w')
+    out.write(''.join(data))
     out.close()
 
 
