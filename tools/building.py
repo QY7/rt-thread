@@ -352,9 +352,7 @@ def PrepareBuilding(env, root_directory, has_libcpu=False, remove_components = [
     bsp_vdir = 'build'
     kernel_vdir = 'build/kernel'
     # board build script
-    print("before entering board build")
     objs = SConscript('SConscript', variant_dir=bsp_vdir, duplicate=0)
-    print("after board build")
     # include kernel
     objs.extend(SConscript(Rtt_Root + '/src/SConscript', variant_dir=kernel_vdir + '/src', duplicate=0))
     # include libcpu
@@ -796,7 +794,7 @@ def DoBuilding(target, objects):
         objects.append(objects_in_group)
 
         program = Env.Program(target, objects)
-    print("before end building")
+
     EndBuilding(target, program)
 
 def GenTargetProject(program = None):
@@ -856,12 +854,10 @@ def GenTargetProject(program = None):
         TargetMakefile(Env)
 
     if GetOption('target') == 'eclipse':
-        print("inside gen")
         from eclipse import TargetEclipse
         TargetEclipse(Env, GetOption('reset-project-config'), GetOption('project-name'))
 
     if GetOption('target') == 'ccs':
-        print("inside gen")
         from eclipse import TargetCCS
         TargetCCS(Env, GetOption('reset-project-config'), GetOption('project-name'))
 
@@ -900,7 +896,7 @@ def EndBuilding(target, program = None):
     Clean(target, 'rtua.py')
     Clean(target, 'rtua.pyc')
     Clean(target, '.sconsign.dblite')
-    print(1)
+
     if GetOption('target'):
         GenTargetProject(program)
         need_exit = True
@@ -913,7 +909,6 @@ def EndBuilding(target, program = None):
         from mkdist import MkDist_Strip
         MkDist_Strip(program, BSP_ROOT, Rtt_Root, Env)
         need_exit = True
-    print(2)
     if GetOption('make-dist-ide') and program != None:
         from mkdist import MkDist
         project_path = GetOption('project-path')
@@ -930,7 +925,6 @@ def EndBuilding(target, program = None):
         rtt_ide = {'project_path' : project_path, 'project_name' : project_name}
         MkDist(program, BSP_ROOT, Rtt_Root, Env, rtt_ide)
         need_exit = True
-    print(3)
     if GetOption('cscope'):
         from cscope import CscopeDatabase
         CscopeDatabase(Projects)
