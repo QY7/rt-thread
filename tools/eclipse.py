@@ -514,10 +514,12 @@ def UpdateCproject(env, project, excluding, reset, prj_name):
     out.write(etree.tostring(root, encoding='utf-8').decode('utf-8'))
     out.close()
 
+
 def TargetEclipse(env, reset=False, prj_name=None):
     global source_pattern
 
     print('Update eclipse setting...')
+    
     # generate cproject file
     if not os.path.exists('.cproject'):
         if rt_studio.gen_cproject_file(os.path.abspath(".cproject")) is False:
