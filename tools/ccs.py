@@ -110,7 +110,6 @@ cproject_temp = """<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 					</folderInfo>
 					<sourceEntries>
 						<entry excluding="|" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="rt-thread/libcpu"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

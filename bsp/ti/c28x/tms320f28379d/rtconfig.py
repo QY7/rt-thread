@@ -1,8 +1,8 @@
 import os
 
 # toolchains options
-ARCH='TIDSP'
-CPU='C28X'
+ARCH='ti-dsp'
+CPU='c28x'
 CROSS_TOOL='ti'
 
 # bsp lib config
