@@ -31,6 +31,21 @@
       <locationURI>virtual:/virtual</locationURI>
     </link>
     <link>
+      <name>libcpu/SConscript</name>
+      <type>1</type>
+      <locationURI>PARENT-4-PROJECT_LOC/libcpu/ti-dsp/c28x/SConscript</locationURI>
+    </link>
+    <link>
+      <name>libcpu/context.s</name>
+      <type>1</type>
+      <locationURI>PARENT-4-PROJECT_LOC/libcpu/ti-dsp/c28x/context.s</locationURI>
+    </link>
+    <link>
+      <name>libcpu/cpuport.c</name>
+      <type>1</type>
+      <locationURI>PARENT-4-PROJECT_LOC/libcpu/ti-dsp/c28x/cpuport.c</locationURI>
+    </link>
+    <link>
       <name>rt-thread/bsp</name>
       <type>2</type>
       <locationURI>virtual:/virtual</locationURI>
@@ -44,11 +59,6 @@
       <name>rt-thread/include</name>
       <type>2</type>
       <locationURI>$%7BPARENT-4-PROJECT_LOC%7D/include</locationURI>
-    </link>
-    <link>
-      <name>rt-thread/libcpu/ti-dsp/c28x</name>
-      <type>2</type>
-      <locationURI>$%7BPARENT-4-PROJECT_LOC%7D/libcpu/ti-dsp/c28x</locationURI>
     </link>
     <link>
       <name>rt-thread/src</name>
