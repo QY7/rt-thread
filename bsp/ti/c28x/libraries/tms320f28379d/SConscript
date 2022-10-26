@@ -7,44 +7,49 @@ cwd = GetCurrentDir()
 
 # The set of source files associated with this SConscript file.
 src = Split("""
-tms320f28379d/common/source/F2837xD_PieCtrl.c
-tms320f28379d/common/source/F2837xD_PieVect.c
-tms320f28379d/common/source/F2837xD_SysCtrl.c
-tms320f28379d/headers/source/F2837xD_GlobalVariableDefs.c
+common/source/F2837xD_PieCtrl.c
+common/source/F2837xD_PieVect.c
+common/source/F2837xD_SysCtrl.c
+common/source/F2837xD_CpuTimers.c
+headers/source/F2837xD_GlobalVariableDefs.c
+common/source/F2837xD_DefaultISR.c
+common/source/F2837xD_Gpio.c
+common/source/F2837xD_usDelay.asm
+headers/cmd/F2837xD_Headers_BIOS_cpu1.cmd
 """)
 
 if GetDepend(['BSP_USING_ADC']):
-    src += ['tms320f28379d/common/source/F2837xD_Adc.c']
+    src += ['common/source/F2837xD_Adc.c']
 
 if GetDepend(['BSP_USING_CAN']):
-    src += ['tms320f28379d/common/source/F2837xD_can.c']
+    src += ['common/source/F2837xD_can.c']
 
-if GetDepend(['BSP_USING_HWTIMER']):
-    src += ['tms320f28379d/common/source/F2837xD_CpuTimers.c']
+    src += ['common/source/F2837xD_CpuTimers.c']
 
 if GetDepend(['BSP_USING_DMA']):
-    src += ['tms320f28379d/common/source/F2837xD_Dma.c']
+    src += ['common/source/F2837xD_Dma.c']
 
 if GetDepend(['BSP_USING_ECAP']):
-    src += ['tms320f28379d/common/source/F2837xD_ECap.c']
+    src += ['common/source/F2837xD_ECap.c']
 
 if GetDepend(['BSP_USING_PWM']):
-    src += ['tms320f28379d/common/source/F2837xD_Epwm.c']
+    src += ['common/source/F2837xD_Epwm.c']
 
 if GetDepend(['BSP_USING_QEP']):
-    src += ['tms320f28379d/common/source/F2837xD_EQep.c']
-
-if GetDepend(['BSP_USING_GPIO']):
-    src += ['tms320f28379d/common/source/F2837xD_Gpio.c']
+    src += ['common/source/F2837xD_EQep.c']
 
 if GetDepend(['BSP_USING_I2C']):
-    src += ['tms320f28379d/common/source/F2837xD_I2C.c']
+    src += ['common/source/F2837xD_I2C.c']
 
 if GetDepend(['BSP_USING_SPI']):
-    src += ['tms320f28379d/common/source/F2837xD_Spi.c']
+    src += ['common/source/F2837xD_Spi.c']
+
+if GetDepend(['BSP_USING_UART']):
+    src += ['common/source/F2837xD_Sci.c']
+    src += ['common/source/F2837xD_sci_io.c']
     
 path = [cwd + '/headers/include', 
-    cwd + '/common/include']
+    cwd + '/headers/include']
 
 CPPDEFINES = ['USE_HAL_DRIVER']
 group = DefineGroup('Libraries', src, depend = [''], CPPPATH = path, CPPDEFINES = CPPDEFINES)

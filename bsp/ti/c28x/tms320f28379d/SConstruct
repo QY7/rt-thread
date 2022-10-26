@@ -40,7 +40,6 @@ if os.path.exists(SDK_ROOT + '/libraries'):
     print("exist")
 else:
     libraries_path_prefix = os.path.dirname(SDK_ROOT) + '/libraries'
-    print("no")
     print(os.path.dirname(SDK_ROOT))
 
 SDK_LIB = libraries_path_prefix
