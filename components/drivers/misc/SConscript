@@ -25,5 +25,5 @@ if GetDepend(['RT_USING_INPUT_CAPTURE']):
 
 if len(src):
     group = DefineGroup('DeviceDrivers', src, depend = [''], CPPPATH = CPPPATH)
-    
+
 Return('group')
