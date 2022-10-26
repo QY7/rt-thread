@@ -15,6 +15,7 @@ headers/source/F2837xD_GlobalVariableDefs.c
 common/source/F2837xD_DefaultISR.c
 common/source/F2837xD_Gpio.c
 common/source/F2837xD_usDelay.asm
+headers/cmd/F2837xD_Headers_BIOS_cpu1.cmd
 """)
 
 if GetDepend(['BSP_USING_ADC']):

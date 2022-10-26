@@ -21,7 +21,7 @@ from utils import xml_indent
 
 MODULE_VER_NUM = 6
 
-source_pattern = ['*.c', '*.cpp', '*.cxx', '*.s', '*.S', '*.asm']
+source_pattern = ['*.c', '*.cpp', '*.cxx', '*.s', '*.S', '*.asm','*.cmd']
 
 
 def OSPath(path):
@@ -557,65 +557,6 @@ def TargetEclipse(env, reset=False, prj_name=None):
     # add clean2 target to fix issues when files too many
     if not os.path.exists('makefile.targets'):
         if rt_studio.gen_makefile_targets(os.path.abspath("makefile.targets")) is False:
-            print('Fail!')
-            return
-
-    project = ProjectInfo(env)
-
-    # update the project file structure info on '.project' file
-    UpdateProjectStructure(env, prj_name)
-
-    # generate the exclude paths and files
-    excluding = GenExcluding(env, project)
-
-    # update the project configuration on '.cproject' file
-    UpdateCproject(env, project, excluding, reset, prj_name)
-
-    print('done!')
-
-    return
-
-def TargetCCS(env, reset=False, prj_name=None):
-    global source_pattern
-
-    print('Update eclipse setting...')
-    # generate cproject file
-    if not os.path.exists('.cproject'):
-        if ccs.gen_cproject_file(os.path.abspath(".cproject")) is False:
-            print('Fail!')
-            return
-
-    # generate project file
-    if not os.path.exists('.project'):
-        if ccs.gen_project_file(os.path.abspath(".project")) is False:
-            print('Fail!')
-            return
-
-    # generate projcfg.ini file
-    if not os.path.exists('.settings/projcfg.ini'):
-    # if search files with uvprojx or uvproj suffix
-        file = ""
-        items = os.listdir(".")
-        if len(items) > 0:
-            for item in items:
-                if item.endswith(".uvprojx") or item.endswith(".uvproj"):
-                    file = os.path.abspath(item)
-                    break
-        chip_name = ccs.get_mcu_info(file)
-        if ccs.gen_projcfg_ini_file(chip_name, prj_name, os.path.abspath(".settings/projcfg.ini")) is False:
-            print('Fail!')
-            return
-
-    # enable lowwer .s file compiled in eclipse cdt
-    if not os.path.exists('.settings/org.eclipse.core.runtime.prefs'):
-        if ccs.gen_org_eclipse_core_runtime_prefs(
-                os.path.abspath(".settings/org.eclipse.core.runtime.prefs")) is False:
-            print('Fail!')
-            return
-
-    # add clean2 target to fix issues when files too many
-    if not os.path.exists('makefile.targets'):
-        if ccs.gen_makefile_targets(os.path.abspath("makefile.targets")) is False:
             print('Fail!')
             return
 

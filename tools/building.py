@@ -182,7 +182,6 @@ def PrepareBuilding(env, root_directory, has_libcpu=False, remove_components = [
                 'cdk':('gcc', 'gcc'),
                 'makefile':('gcc', 'gcc'),
                 'eclipse':('gcc', 'gcc'),
-                'ccs':{'gcc','ti-gcc'},
                 'ses' : ('gcc', 'gcc'),
                 'cmake':('gcc', 'gcc'),
                 'cmake-armclang':('keil', 'armclang'),
@@ -856,10 +855,6 @@ def GenTargetProject(program = None):
     if GetOption('target') == 'eclipse':
         from eclipse import TargetEclipse
         TargetEclipse(Env, GetOption('reset-project-config'), GetOption('project-name'))
-
-    if GetOption('target') == 'ccs':
-        from eclipse import TargetCCS
-        TargetCCS(Env, GetOption('reset-project-config'), GetOption('project-name'))
 
     if GetOption('target') == 'codelite':
         from codelite import TargetCodelite

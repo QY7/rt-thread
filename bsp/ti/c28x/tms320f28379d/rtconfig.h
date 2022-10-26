@@ -187,6 +187,7 @@
 #define BSP_USING_GPIO
 #define BSP_USING_UART
 #define BSP_USING_UART1
+#define BSP_USING_ADC
 
 /* Board extended module Drivers */
 
