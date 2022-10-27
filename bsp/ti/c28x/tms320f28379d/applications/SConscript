@@ -7,7 +7,7 @@ cwd = GetCurrentDir()
 
 # The set of source files associated with this SConscript file.
 src = Split("""
-    startup.c
+    main.c
 """)
 
 group = DefineGroup('Driver', src, depend = [''])
