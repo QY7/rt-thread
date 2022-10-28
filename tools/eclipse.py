@@ -431,11 +431,6 @@ def GenExcluding(env, project):
     exclude_files = ExcludeFiles(all_files, src_files)
     exclude_files = [RelativeProjectPath(env, file).replace('\\', '/') for file in exclude_files]
 
-    for i in range(len(exclude_files)):
-        if("rt-thread/bsp/ti/c28x/libraries" in exclude_files[i]):
-            exclude_files[i] = exclude_files[i].replace('rt-thread/bsp/ti/c28x/libraries','libraries')
-            print(exclude_files[i])
-
     env['ExPaths'] = exclude_paths
     env['ExFiles'] = exclude_files
 
