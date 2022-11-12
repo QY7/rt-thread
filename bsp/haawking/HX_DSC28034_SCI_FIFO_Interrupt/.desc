@@ -1,0 +1,4 @@
+Creates an basic project initialized for the HXS320F28034BBB. The project will contain an empty 'main.c' source-file.
+IQmathLib Version: V1.2.0
+Driver Version: V1.1.0
+emRun Version: 4.10
