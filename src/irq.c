@@ -92,6 +92,10 @@ RT_WEAK void rt_interrupt_enter(void)
 }
 RTM_EXPORT(rt_interrupt_enter);
 
+extern volatile rt_ubase_t  rt_interrupt_from_thread;
+extern volatile rt_ubase_t  rt_interrupt_to_thread;
+extern volatile rt_uint32_t rt_thread_switch_interrupt_flag;
+
 
 /**
  * @brief This function will be invoked by BSP, when leave interrupt service routine
@@ -110,6 +114,15 @@ RT_WEAK void rt_interrupt_leave(void)
     level = rt_hw_interrupt_disable();
     RT_OBJECT_HOOK_CALL(rt_interrupt_leave_hook,());
     rt_interrupt_nest --;
+
+    if(rt_thread_switch_interrupt_flag)
+    {
+        if(~rt_interrupt_nest)
+        {
+        	rt_thread_switch_interrupt_flag = 0;
+        	rt_hw_context_switch(rt_interrupt_from_thread, rt_interrupt_to_thread);
+        }
+    }
     rt_hw_interrupt_enable(level);
 }
 RTM_EXPORT(rt_interrupt_leave);

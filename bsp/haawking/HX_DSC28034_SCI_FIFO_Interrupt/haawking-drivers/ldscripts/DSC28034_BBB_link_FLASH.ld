@@ -1,7 +1,7 @@
 /*
 //###########################################################################################################
 //
-//FILE:    DSC28034_BB_link_FLASH.ld
+//FILE:    DSC28034_link_FLASH.ld
 //
 //
 //TITLE: Flash Project linker file
@@ -79,11 +79,8 @@ MEMORY
   GpioDataRegs_FILE (rwx) : ORIGIN  = 0x0000D838 , LENGTH = 48                            /* GPIO data registers */
   GpioIntRegs_FILE (rwx)  : ORIGIN  = 0x0000D868 , LENGTH = 16                               /*GPIO interrupt registers */
 
-  SysCtrlRegs_FILE (rwx)  : ORIGIN  = 0x0000DC00 , LENGTH = 80                            /* system control registers */
-  
-  SysPwrCtrlRegs_FILE (rwx) : ORIGIN  = 0x0000DC60 , LENGTH = 4                           /* System Brown-Out reset register */
- 
-  DevEmuRegs_FILE (rwx)   :   ORIGIN  =  0xDC80 ,LENGTH = 12                               /* Device configuration register */
+  SysCtrlRegs_FILE (rw)  : ORIGIN  = 0x0000DC00 , LENGTH = 0x100                            /* system control registers */
+
 
   SciaRegs_FILE (rwx)  :  ORIGIN  = 0x0000E000 , LENGTH = 248                                /* SCI-A registers */
 
@@ -168,11 +165,6 @@ SECTIONS
 
   .SysCtrlRegs(NOLOAD)   :  { *(.SysCtrlRegs)  }  > SysCtrlRegs_FILE
   
-  .SysPwrCtrlRegs(NOLOAD) :  { *(.SysPwrCtrlRegs)} > SysPwrCtrlRegs_FILE
-  
-  .DevEmuRegs(NOLOAD)    :  { *(.DevEmuRegs) } > DevEmuRegs_FILE
-  
-  
   .Comp1Regs(NOLOAD)     :  { *(.Comp1Regs)  }  >  Comp1Regs_FILE
   .Comp2Regs(NOLOAD)     :  { *(.Comp2Regs)  }  >  Comp2Regs_FILE
   .Comp3Regs(NOLOAD)     :  { *(.Comp3Regs)  }  >  Comp3Regs_FILE
@@ -189,14 +181,14 @@ SECTIONS
 
   .FlashRegs(NOLOAD)    :  { *(.FlashRegs)  }  >  FlashRegs_FILE
 
-  .CsmPwl       :  { KEEP(*(.CsmPwl))  }   > CsmPwl_FILE
+  .CsmPwl       :  { *(.CsmPwl)  }   > CsmPwl_FILE
 
 
   .HRCap1Regs(NOLOAD) :  { *(.HRCap1Regs) } >   HRCap1Regs_FILE
 
   .HRCap2Regs(NOLOAD)  :  { *(.HRCap2Regs) } >   HRCap2Regs_FILE
   
-  .Flash_Reset  : { KEEP(*(.Flash_Reset)) }  >  Flash_Reset_FILE
+  .Flash_Reset  : { *(.Flash_Reset) }  >  Flash_Reset_FILE
 
  ._IQsinTable 0x00000000007f8000 (NOLOAD):  { IQsinTable = .  ;
   IQcosTable = . + 512 ;
@@ -230,7 +222,7 @@ SECTIONS
   . = 0x00700000;
   .text.init  : { *(.text.init)  }  > FLASH
   
-  .text  ALIGN(16) : { *(.text) *(.IQmath.*) *(.text*)  *(.rodata .rodata.*)  } > FLASH
+  .text  ALIGN(16) : { *(.text) *(.IQmath) *(.text*)  *(.rodata .rodata.*)  } > FLASH
 
   .FLASH_L0_DATA  ALIGN(16):{ __flash_start   =  . ; } > FLASH
 
@@ -259,15 +251,27 @@ SECTIONS
  
   /* bss segment */
  
-  .sbss (NOLOAD) : ALIGN(0x80) {
+  .sbss ALIGN(0x80): {
     __bss_start = .;
     *(.sbss .sbss.* .gnu.linkonce.sb.*)
     *(.scommon)
 
   }  > PRAML0
-       /* The uninitialised data sections .NOLOAD is used to avoid the "section '.bss'type changed to PROGBITS"warning   */
-  .bss (NOLOAD) : ALIGN(0x8) { *(.bss)  *(.bss.*)  __bss_end = ALIGN(0x8);} > PRAML0
+  .bss ALIGN(0x80): { *(.bss)  *(.bss.*)  __bss_end = .;} > PRAML0
   
+  /* thread-local data segment */
+  .tdata :
+  {
+    _tls_data = .;
+    *(.tdata.begin)
+    *(.tdata)
+    *(.tdata.end)
+  }  > PRAML0
+  .tbss :
+  {
+    *(.tbss)
+    *(.tbss.end)
+  }  > PRAML0
   
   
 
@@ -276,7 +280,7 @@ SECTIONS
   {
   __l1_data_start = . ;
   *(L1)
-  *(ramfuncs1)
+  
   __l1_data_end = ALIGN(8);
   } > PRAML1
 
@@ -306,4 +310,3 @@ SECTIONS
   /* End of uninitalized data segement */
   _end = .;
 }
-

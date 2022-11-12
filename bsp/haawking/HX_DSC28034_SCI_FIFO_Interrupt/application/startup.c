@@ -37,8 +37,8 @@ int main(void)
 
     rt_uint32_t para1=0,para2=0;
 
-    thread2 = rt_thread_create("thread2",thread2_entry,&para2,400,13,10);
-    thread1 = rt_thread_create("thread1",thread1_entry,&para1,400,13,10);
+    thread2 = rt_thread_create("thread2",thread2_entry,&para2,400,5,10);
+    thread1 = rt_thread_create("thread1",thread1_entry,&para1,400,5,10);
 
     rt_thread_startup(thread1);
     rt_thread_startup(thread2);

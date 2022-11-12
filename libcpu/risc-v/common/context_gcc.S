@@ -34,6 +34,22 @@ rt_hw_interrupt_enable:
     ret
 
 /*
+ * rt_base_t rt_hw_save_context(void);
+ */
+    .globl rt_hw_save_context
+rt_hw_save_context:
+    csrr a0, mepc
+    ret
+
+/*
+ * void rt_hw_restore_context(rt_base_t);
+ */
+    .globl rt_hw_restore_context
+rt_hw_restore_context:
+    csrw mepc, a0
+    ret
+
+/*
  * #ifdef RT_USING_SMP
  * void rt_hw_context_switch_to(rt_ubase_t to, stuct rt_thread *to_thread);
  * #else
