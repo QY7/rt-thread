@@ -26,54 +26,39 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>rt-thread/components</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
 			<name>rt-thread/include</name>
 			<type>2</type>
-			<locationURI>PARENT-3-PROJECT_LOC/include</locationURI>
+			<locationURI>$%7BPARENT-3-PROJECT_LOC%7D/include</locationURI>
 		</link>
 		<link>
 			<name>rt-thread/src</name>
 			<type>2</type>
-			<locationURI>PARENT-3-PROJECT_LOC/src</locationURI>
+			<locationURI>$%7BPARENT-3-PROJECT_LOC%7D/src</locationURI>
+		</link>
+		<link>
+			<name>rt-thread/bsp/risc-v</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
 			<name>rt-thread/components/drivers</name>
 			<type>2</type>
-			<locationURI>PARENT-3-PROJECT_LOC/components/drivers</locationURI>
+			<locationURI>$%7BPARENT-3-PROJECT_LOC%7D/components/drivers</locationURI>
 		</link>
 		<link>
 			<name>rt-thread/components/finsh</name>
 			<type>2</type>
-			<locationURI>PARENT-3-PROJECT_LOC/components/finsh</locationURI>
+			<locationURI>$%7BPARENT-3-PROJECT_LOC%7D/components/finsh</locationURI>
 		</link>
 		<link>
-			<name>rt-thread/libcpu/risc-v/common/SConscript</name>
-			<type>1</type>
-			<locationURI>PARENT-3-PROJECT_LOC/libcpu/risc-v/common/SConscript</locationURI>
-		</link>
-		<link>
-			<name>rt-thread/libcpu/risc-v/common/context_gcc.S</name>
-			<type>1</type>
-			<locationURI>PARENT-3-PROJECT_LOC/libcpu/risc-v/common/context_gcc.S</locationURI>
-		</link>
-		<link>
-			<name>rt-thread/libcpu/risc-v/common/cpuport.c</name>
-			<type>1</type>
-			<locationURI>PARENT-3-PROJECT_LOC/libcpu/risc-v/common/cpuport.c</locationURI>
-		</link>
-		<link>
-			<name>rt-thread/libcpu/risc-v/common/cpuport.h</name>
-			<type>1</type>
-			<locationURI>PARENT-3-PROJECT_LOC/libcpu/risc-v/common/cpuport.h</locationURI>
-		</link>
-		<link>
-			<name>rt-thread/libcpu/risc-v/common/riscv-ops.h</name>
-			<type>1</type>
-			<locationURI>PARENT-3-PROJECT_LOC/libcpu/risc-v/common/riscv-ops.h</locationURI>
-		</link>
-		<link>
-			<name>rt-thread/libcpu/risc-v/common/riscv-plic.h</name>
-			<type>1</type>
-			<locationURI>PARENT-3-PROJECT_LOC/libcpu/risc-v/common/riscv-plic.h</locationURI>
+			<name>rt-thread/libcpu/risc-v/common</name>
+			<type>2</type>
+			<locationURI>$%7BPARENT-3-PROJECT_LOC%7D/libcpu/risc-v/common</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
