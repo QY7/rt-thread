@@ -101,7 +101,7 @@
 #include <float.h>
 #endif
 
-extern int main(int argc, char **argv);
+extern int super_main();
 // output function type
 typedef void (*out_fct_type)(char character, void* buffer, size_t idx, size_t maxlen);
 
@@ -1139,6 +1139,7 @@ void _init(void)
   // only single-threaded programs should ever get here.
   Flash_bankwaitInit();
   _EnableDog();
+  super_main();
 }
 
 

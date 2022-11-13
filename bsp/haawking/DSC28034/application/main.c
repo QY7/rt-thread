@@ -39,13 +39,13 @@ int main(void)
 
     rt_uint32_t para1=0,para2=0;
 
-    thread1 = rt_thread_create("thread1",thread1_entry,&para1,100,6,10);
-    thread2 = rt_thread_create("thread2",thread2_entry,&para2,100,6,10);
+    thread1 = rt_thread_create("thread1",thread1_entry,&para1,100,4,10);
+    thread2 = rt_thread_create("thread2",thread2_entry,&para2,100,4,10);
 
     rt_thread_startup(thread1);
     rt_thread_startup(thread2);
 
-    while(x)
+    while(1)
     {
         x--;
     }
