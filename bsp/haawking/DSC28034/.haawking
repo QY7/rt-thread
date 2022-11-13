@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<?fileVersion 4.0.0?>
+<haawking version="2.0.0">
+	<device-macro>DSC28034_BBB</device-macro>
+	
+	<chip-model>HXS320F28034_BBB</chip-model>
+	
+	<full-chip-model>HXS320F28034_BBB_PNT</full-chip-model>
+		
+	<openocd-command-prefix>dsc28034_bbb</openocd-command-prefix>
+	
+	<hardware-breakpoint-count>2</hardware-breakpoint-count>
+	
+	<architecture>RISC-V</architecture>
+	
+	<instruction-set>imc</instruction-set>
+	
+	<storage-endian>little</storage-endian>
+	
+	<debug-restart>
+		<write-str>
+			<command>monitor reset init</command>
+			<command>monitor reset init</command>
+			<command>monitor dsc28034 unlock 0</command>
+			<command>monitor reg pc $program_start_addr</command>
+			<command>monitor mww 0Xdc40 0X68</command>
+		</write-str>
+	</debug-restart>
+	
+	<flashStart>0x700000</flashStart>
+	<flashEnd>0x740000</flashEnd>
+	<otpStart>0x7a0000</otpStart>
+	<flashDownloadCommandPrefix>dsc28034 write 0</flashDownloadCommandPrefix>
+</haawking>
