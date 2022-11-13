@@ -183,8 +183,15 @@ static const struct rt_uart_ops c28x_uart_ops =
 //
 // sciaRxFifoIsr - SCIA Receive FIFO ISR
 //
+extern rt_base_t rt_hw_save_context(void);
+extern void rt_hw_restore_context(rt_base_t);
+
 __interrupt void sciaRxFifoIsr(void)
 {
+
+	rt_base_t context;
+
+	context = rt_hw_save_context();
 
     /* enter interrupt */
     rt_interrupt_enter();
@@ -193,6 +200,8 @@ __interrupt void sciaRxFifoIsr(void)
 
     /* leave interrupt */
     rt_interrupt_leave();
+
+    rt_hw_restore_context(context);
 }
 void Scia_Config1(uint32 baud);
 void Scia_Config1(uint32 baud)
