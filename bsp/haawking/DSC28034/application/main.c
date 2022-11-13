@@ -15,7 +15,6 @@
 #include <rtthread.h>
 #include "board.h"
 #include "DSP2803x_Device.h"
-#include "dsc_config.h"
 void thread1_entry(void* parameter)
 {
 	while(1)
@@ -39,13 +38,13 @@ int main(void)
 
     rt_uint32_t para1=0,para2=0;
 
-    thread1 = rt_thread_create("thread1",thread1_entry,&para1,100,4,10);
-    thread2 = rt_thread_create("thread2",thread2_entry,&para2,100,4,10);
+    thread1 = rt_thread_create("thread1",thread1_entry,&para1,400,6,10);
+    thread2 = rt_thread_create("thread2",thread2_entry,&para2,400,6,10);
 
     rt_thread_startup(thread1);
     rt_thread_startup(thread2);
 
-    while(1)
+    while(x)
     {
         x--;
     }

@@ -230,7 +230,23 @@ SECTIONS
   . = 0x00700000;
   .text.init  : { *(.text.init)  }  > FLASH
   
-  .text  ALIGN(16) : { *(.text) *(.IQmath.*) *(.text*)  *(.rodata .rodata.*)  } > FLASH
+  .text  ALIGN(16) : { *(.text) *(.IQmath.*) *(.text*)  *(.rodata .rodata.*) 
+  	. = ALIGN(8);
+  	 __fsymtab_start = .;
+    KEEP(*(FSymTab))
+    __fsymtab_end = .;
+    . = ALIGN(8);
+    __vsymtab_start = .;
+    KEEP(*(VSymTab))
+    __vsymtab_end = .;
+    . = ALIGN(8);
+
+    /* section information for initial. */
+    . = ALIGN(8);
+    __rt_init_start = .;
+    KEEP(*(SORT(.rti_fn*)))
+    __rt_init_end = .;
+  } > FLASH
 
   .FLASH_L0_DATA  ALIGN(16):{ __flash_start   =  . ; } > FLASH
 
