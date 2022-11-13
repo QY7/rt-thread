@@ -148,6 +148,7 @@ static int c28x_getc(struct rt_serial_device *serial)
     if(SciaRegs.SCIRXST.bit.RXRDY)
     {
     	ch = SciaRegs.SCIRXBUF.bit.RXDT;
+    	return ch;
     }
     else
     {

@@ -7,7 +7,6 @@
 #define SOC_TMS320F28X
 
 /* RT-Thread Kernel */
-
 #define RT_NAME_MAX 8
 #define RT_ALIGN_SIZE 4
 #define RT_THREAD_PRIORITY_8
