@@ -254,6 +254,7 @@ SECTIONS
     *(.sdata .sdata.* .gnu.linkonce.s.*)
     *(L0)
 	*(ramfuncs)
+	*(ramfuncs1)
      __data_end = ALIGN(8);
   }  > PRAML0
  
@@ -276,7 +277,6 @@ SECTIONS
   {
   __l1_data_start = . ;
   *(L1)
-  *(ramfuncs1)
   __l1_data_end = ALIGN(8);
   } > PRAML1
 
