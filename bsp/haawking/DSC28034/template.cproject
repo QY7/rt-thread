@@ -157,8 +157,6 @@
                   <listOptionValue builtIn="false" value="haawking-segger_imc" />
                   <listOptionValue builtIn="false" value="DSC28034_BBB_init_call" />
                   <listOptionValue builtIn="false" value="IQmath" />
-                  <listOptionValue builtIn="false" value="c     " />
-                  <listOptionValue builtIn="false" value="m     " />
                 </option>
                 <inputType id="ilg.gnumcueclipse.managedbuild.cross.riscv.tool.c.linker.input.1836441890" superClass="ilg.gnumcueclipse.managedbuild.cross.riscv.tool.c.linker.input">
                   <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)" />
