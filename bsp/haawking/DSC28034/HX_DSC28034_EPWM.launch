@@ -24,7 +24,7 @@
     <stringAttribute key="ilg.gnumcueclipse.debug.gdbjtag.openocd.gdbServerFlashPasswordNum4" value="FFFFFFFF"/>
     <intAttribute key="ilg.gnumcueclipse.debug.gdbjtag.openocd.gdbServerGdbPortNumber" value="3333"/>
     <stringAttribute key="ilg.gnumcueclipse.debug.gdbjtag.openocd.gdbServerLog" value=""/>
-    <stringAttribute key="ilg.gnumcueclipse.debug.gdbjtag.openocd.gdbServerOther" value="-f &quot;haawking-drivers/haawking-dsc28034_bbb-board/board/haawking-dsc28034_bbb.cfg&quot;"/>
+    <stringAttribute key="ilg.gnumcueclipse.debug.gdbjtag.openocd.gdbServerOther" value="-f &quot;board/haawking-dsc28034_bbb.cfg&quot;"/>
     <stringAttribute key="ilg.gnumcueclipse.debug.gdbjtag.openocd.gdbServerTclPortNumber" value="6666"/>
     <intAttribute key="ilg.gnumcueclipse.debug.gdbjtag.openocd.gdbServerTelnetPortNumber" value="4444"/>
     <stringAttribute key="ilg.gnumcueclipse.debug.gdbjtag.openocd.openocdLogPath" value="${projectPath}\openocd_log.txt"/>
