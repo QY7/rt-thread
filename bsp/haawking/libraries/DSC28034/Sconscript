@@ -21,6 +21,7 @@ DSP2803x_common/source/DSP2803x_DefaultIsr.c
 DSP2803x_common/source/DSP2803x_PieCtrl.c
 DSP2803x_common/source/DSP2803x_PieVect.c
 DSP2803x_common/source/DSP2803x_SysCtrl.c
+DSP2803x_common/source/DSP2803x_CpuTimers.c
 DSP2803x_headers/source/DSP2803x_GlobalVariableDefs.c
 ldscripts/DSC28034_BBB_link_FLASH.ld
 """)
