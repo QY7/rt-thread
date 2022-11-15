@@ -18,6 +18,12 @@
 			</arguments>
     </buildCommand>
   </buildSpec>
+  <natures>
+    <nature>org.eclipse.cdt.core.cnature</nature>
+    <nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
+    <nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
+    <nature>org.eclipse.cdt.core.ccnature</nature>
+  </natures>
   <linkedResources>
     <link>
       <name>libcpu/SConscript</name>
@@ -70,9 +76,9 @@
       <locationURI>PARENT-3-PROJECT_LOC/components/finsh</locationURI>
     </link>
     <link>
-      <name>rt-thread/bsp/haawking/libraries/F28034</name>
+      <name>rt-thread/bsp/haawking/libraries/DSC28034</name>
       <type>2</type>
-      <locationURI>PARENT-1-PROJECT_LOC/libraries/F28034</locationURI>
+      <locationURI>PARENT-1-PROJECT_LOC/libraries/DSC28034</locationURI>
     </link>
     <link>
       <name>rt-thread/bsp/haawking/libraries/HAL_Drivers</name>
@@ -80,10 +86,4 @@
       <locationURI>PARENT-1-PROJECT_LOC/libraries/HAL_Drivers</locationURI>
     </link>
   </linkedResources>
-  <natures>
-    <nature>org.eclipse.cdt.core.cnature</nature>
-    <nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
-    <nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
-    <nature>org.eclipse.cdt.core.ccnature</nature>
-  </natures>
 </projectDescription>
