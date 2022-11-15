@@ -429,6 +429,8 @@ def GenExcluding(env, project):
     src_files = project['FILES']
 
     exclude_files = ExcludeFiles(all_files, src_files)
+    for file in exclude_files:
+        print(file)
     exclude_files = [RelativeProjectPath(env, file).replace('\\', '/') for file in exclude_files]
 
     env['ExPaths'] = exclude_paths

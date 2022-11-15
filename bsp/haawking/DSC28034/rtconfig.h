@@ -4,9 +4,10 @@
 /* Automatically generated file; DO NOT EDIT. */
 /* RT-Thread Configuration */
 
-#define SOC_TMS320F28X
+#define SOC_RISCV
 
 /* RT-Thread Kernel */
+
 #define RT_NAME_MAX 8
 #define RT_ALIGN_SIZE 4
 #define RT_THREAD_PRIORITY_8
@@ -43,10 +44,6 @@
 #define RT_CONSOLEBUF_SIZE 128
 #define RT_CONSOLE_DEVICE_NAME "scia"
 #define RT_VER_NUM 0x50000
-#define ARCH_TIDSP
-#define ARCH_TIDSP_C28X
-#define __TERAMIC
-//#define ARCH_CPU_STACK_GROWS_UPWARD
 
 /* RT-Thread Components */
 
@@ -59,7 +56,7 @@
 #define FINSH_USING_MSH
 #define FINSH_THREAD_NAME "tshell"
 #define FINSH_THREAD_PRIORITY 4
-#define FINSH_THREAD_STACK_SIZE 6144
+#define FINSH_THREAD_STACK_SIZE 4096
 #define FINSH_USING_HISTORY
 #define FINSH_HISTORY_LINES 5
 #define FINSH_USING_SYMTAB
@@ -183,6 +180,8 @@
 /* On-chip Peripheral Drivers */
 
 #define BSP_USING_GPIO
+#define BSP_USING_UART
+#define BSP_USING_UART1
 
 /* Board extended module Drivers */
 

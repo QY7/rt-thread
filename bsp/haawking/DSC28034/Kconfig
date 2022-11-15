@@ -8,7 +8,7 @@ config BSP_DIR
 config RTT_DIR
     string
     option env="RTT_ROOT"
-    default "../../../"
+    default "../../.."
     
 # you can change the RTT_ROOT default "../.." to your rtthread_root,
 # example : default "F:/git_repositories/rt-thread"
@@ -18,9 +18,8 @@ config PKGS_DIR
     option env="PKGS_ROOT"
     default "packages"
 
-config SOC_TMS320F28X
+config SOC_RISCV
     bool
-    select ARCH_TIDSP_C28X
     select RT_USING_COMPONENTS_INIT
     select RT_USING_USER_MAIN
     default y
