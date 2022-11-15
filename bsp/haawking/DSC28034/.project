@@ -70,12 +70,12 @@
       <locationURI>PARENT-3-PROJECT_LOC/components/finsh</locationURI>
     </link>
     <link>
-      <name>rt-thread/bsp/libraries/F28034</name>
+      <name>rt-thread/bsp/haawking/libraries/F28034</name>
       <type>2</type>
       <locationURI>PARENT-1-PROJECT_LOC/libraries/F28034</locationURI>
     </link>
     <link>
-      <name>rt-thread/bsp/libraries/HAL_Drivers</name>
+      <name>rt-thread/bsp/haawking/libraries/HAL_Drivers</name>
       <type>2</type>
       <locationURI>PARENT-1-PROJECT_LOC/libraries/HAL_Drivers</locationURI>
     </link>
