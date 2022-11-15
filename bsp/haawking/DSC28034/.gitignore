@@ -1,2 +1,4 @@
 !lib/*
-.settings
+makefile.targets
+.settings/
+Debug/
