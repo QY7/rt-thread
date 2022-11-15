@@ -76,11 +76,7 @@ static int rti_end(void)
     return 0;
 }
 INIT_EXPORT(rti_end, "6.end");
-static int rti_test(void)
-{
-    return 0;
-}
-INIT_APP_EXPORT(rti_test);
+
 /**
  * @brief  Onboard components initialization. In this function, the board-level
  *         initialization function will be called to complete the initialization

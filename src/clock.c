@@ -90,7 +90,7 @@ void rt_tick_set(rt_tick_t tick)
  */
 void rt_tick_increase(void)
 {
-    volatile struct rt_thread *thread;
+    struct rt_thread *thread;
     rt_base_t level;
 
     RT_OBJECT_HOOK_CALL(rt_tick_hook, ());
