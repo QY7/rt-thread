@@ -7,6 +7,7 @@
 #define SOC_TMS320F28X
 
 /* RT-Thread Kernel */
+
 #define RT_NAME_MAX 8
 #define RT_ALIGN_SIZE 4
 #define RT_THREAD_PRIORITY_8
@@ -45,7 +46,6 @@
 #define RT_VER_NUM 0x50000
 #define ARCH_TIDSP
 #define ARCH_TIDSP_C28X
-#define __TERAMIC
 //#define ARCH_CPU_STACK_GROWS_UPWARD
 
 /* RT-Thread Components */
@@ -183,6 +183,8 @@
 /* On-chip Peripheral Drivers */
 
 #define BSP_USING_GPIO
+#define BSP_USING_UART
+#define BSP_USING_UART1
 
 /* Board extended module Drivers */
 
