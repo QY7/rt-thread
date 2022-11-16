@@ -28,5 +28,4 @@ path =  [cwd]
 path += [cwd + '/config']
 
 group = DefineGroup('Drivers', src, depend = [''], CPPPATH = path)
-print("in libraries")
 Return('group')
