@@ -107,7 +107,7 @@ rt_uint8_t *rt_hw_stack_init(void       *tentry,
 {
     struct rt_hw_stack_frame *frame;
     rt_uint8_t         *stk;
-    int                i;
+    unsigned int        i;
 
     stk  = stack_addr + sizeof(rt_ubase_t);
     stk  = (rt_uint8_t *)RT_ALIGN_DOWN((rt_ubase_t)stk, REGBYTES);
