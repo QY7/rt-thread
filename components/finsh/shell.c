@@ -410,7 +410,7 @@ static void shell_push_history(struct finsh_shell *shell)
         if (shell->history_count >= FINSH_HISTORY_LINES)
         {
             /* if current cmd is same as last cmd, don't push */
-            if (memcmp(&shell->cmd_history[FINSH_HISTORY_LINES - 1], shell->line, FINSH_CMD_SIZE))
+            if (rt_memcmp(&shell->cmd_history[FINSH_HISTORY_LINES - 1], shell->line, FINSH_CMD_SIZE))
             {
                 /* move history */
                 int index;
@@ -429,7 +429,7 @@ static void shell_push_history(struct finsh_shell *shell)
         else
         {
             /* if current cmd is same as last cmd, don't push */
-            if (shell->history_count == 0 || memcmp(&shell->cmd_history[shell->history_count - 1], shell->line, FINSH_CMD_SIZE))
+            if (shell->history_count == 0 || rt_memcmp(&shell->cmd_history[shell->history_count - 1], shell->line, FINSH_CMD_SIZE))
             {
                 shell->current_history = shell->history_count;
                 rt_memset(&shell->cmd_history[shell->history_count][0], 0, FINSH_CMD_SIZE);

@@ -1,0 +1,5 @@
+!lib/*
+makefile.targets
+.settings/
+Debug/
+*.stackdump
