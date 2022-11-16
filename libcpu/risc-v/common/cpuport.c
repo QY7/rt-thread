@@ -14,6 +14,8 @@
 
 #include "cpuport.h"
 
+extern volatile rt_uint8_t rt_interrupt_nest;
+
 #ifndef RT_USING_SMP
 volatile rt_ubase_t  rt_interrupt_from_thread = 0;
 volatile rt_ubase_t  rt_interrupt_to_thread   = 0;
@@ -161,4 +163,25 @@ RT_WEAK void rt_hw_cpu_shutdown()
     {
         RT_ASSERT(0);
     }
+}
+
+void rt_interrupt_leave(void)
+{
+    rt_base_t level;
+
+    RT_DEBUG_LOG(RT_DEBUG_IRQ, ("irq is going to leave, irq current nest:%d\n",
+                                (rt_int32_t)rt_interrupt_nest));
+
+    level = rt_hw_interrupt_disable();
+    RT_OBJECT_HOOK_CALL(rt_interrupt_leave_hook,());
+    rt_interrupt_nest --;
+    if(rt_thread_switch_interrupt_flag)
+    {
+        if(~rt_interrupt_nest)
+        {
+        	rt_thread_switch_interrupt_flag = 0;
+        	rt_hw_context_switch(rt_interrupt_from_thread, rt_interrupt_to_thread);
+        }
+    }
+    rt_hw_interrupt_enable(level);
 }
