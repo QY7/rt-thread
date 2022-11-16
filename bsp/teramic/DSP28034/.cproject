@@ -115,6 +115,8 @@
                                     									
                                     <listOptionValue builtIn="false" value="&quot;../teramic-drivers/teramic-dsc28034-board/DSP2803x_common/include&quot;"/>
                                     									
+                                    <listOptionValue builtIn="false" value="&quot;../&quot;"/>
+                                    									
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/TSET_BO}&quot;"/>
                                     								
                                 </option>
