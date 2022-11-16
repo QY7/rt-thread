@@ -21,7 +21,6 @@
 #include <rthw.h>
 #include <string.h>
 #include <stdio.h>
-
 #ifdef RT_USING_FINSH
 
 #include "shell.h"

@@ -139,6 +139,8 @@
                                     									
                                     <listOptionValue builtIn="false" value="&quot;../../../../components/finsh&quot;"/>
                                     									
+                                    <listOptionValue builtIn="false" value="&quot;D:\Software\Teramic-IDE-win64-V1.5.1\dsc-tools\compiler\riscv-tc-gcc\riscv64-unknown-elf\include&quot;"/>
+                                    									
                                     <listOptionValue builtIn="false" value="&quot;${project_loc}/../../../../components/drivers/include&quot;"/>
                                     									
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/../libraries/HAL_Drivers}&quot;"/>
