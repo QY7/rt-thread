@@ -18,9 +18,8 @@ config PKGS_DIR
     option env="PKGS_ROOT"
     default "packages"
 
-config SOC_TMS320F28X
+config SOC_RISCV
     bool
-    select ARCH_TIDSP_C28X
     select RT_USING_COMPONENTS_INIT
     select RT_USING_USER_MAIN
     default y
