@@ -364,7 +364,7 @@ rt_err_t rt_thread_startup(rt_thread_t thread)
     /* parameter check */
     RT_ASSERT(thread != RT_NULL);
     RT_ASSERT((thread->stat & RT_THREAD_STAT_MASK) == RT_THREAD_INIT);
-   RT_ASSERT(rt_object_get_type((rt_object_t)thread) == RT_Object_Class_Thread);
+    RT_ASSERT(rt_object_get_type((rt_object_t)thread) == RT_Object_Class_Thread);
 
     /* calculate priority attribute */
 #if RT_THREAD_PRIORITY_MAX > 32
