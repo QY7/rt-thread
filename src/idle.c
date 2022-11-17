@@ -305,7 +305,7 @@ static void rt_thread_system_entry(void *parameter)
  */
 void rt_thread_idle_init(void)
 {
-    volatile rt_ubase_t i;
+    rt_ubase_t i;
     char idle_thread_name[RT_NAME_MAX];
 
     for (i = 0; i < _CPUS_NR; i++)
