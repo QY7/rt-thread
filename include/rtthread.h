@@ -27,7 +27,6 @@
 #include <rtdef.h>
 #include <rtservice.h>
 #include <rtm.h>
-#include "stdarg.h"
 #ifdef RT_USING_LEGACY
 #include <rtlegacy.h>
 #endif

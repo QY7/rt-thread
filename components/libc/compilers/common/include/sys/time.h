@@ -48,7 +48,6 @@ struct timezone
 
 #ifndef _TIMEVAL_DEFINED
 #define _TIMEVAL_DEFINED
-
 struct timeval
 {
     time_t      tv_sec;     /* seconds */
